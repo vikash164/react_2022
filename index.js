@@ -1,19 +1,53 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
-import '../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'
+import express from "express"
+import cors from "cors"
+import mongoose from "mongoose"
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const app = express()
+app.use(express.json())
+app.use(express.urlencoded())
+app.use(cors())
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+ mongoose.connect("mongodb://localhost:27017/myReactMasterDB", {
+// const url ='mongodb+srv://vikash:<password>@cluster0.m2z1k.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}, () => {
+    console.log("DB connected")
+})
+
+const userSchema = new mongoose.Schema({
+    Name: String,
+    Phone: Number,
+    Email: String,
+    Message: String
+})
+
+const User = new mongoose.model("User", userSchema)
+//Routes
+app.post("/contact", (req, res)=> {
+    const { Name,Phone , Email, Message} = req.body
+    {
+        const user = new User({
+            Name,
+            Phone,
+            Email,
+            Message
+        })
+        user.save(err => {})
+
+        console.log(' Data will be saved into the DB');
+        data.save();
+        //res.render('contact')
+        res.redirect('/Home');
+    
+    }
+})
+           
+    
+
+   
+    
+
+app.listen(9002,() => {
+    console.log("BE started at port 9002")
+})
