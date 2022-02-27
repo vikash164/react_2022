@@ -1,0 +1,33 @@
+p{
+  font-size: 14px;
+  color: #262626;
+}
+.section{
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.main-heading{
+  color: red;
+  font-size: 26px;
+}
+.underline{
+  height: 04px;
+  width: 4rem;
+  background-color: red;
+  margin-top: 10px;
+}
+.bg-c-light{
+  background-color: rgb(128, 128, 128);
+}
+
+
+.footer a{
+  color: white;
+  text-decoration: none !important;
+}
+.footer a:hover{
+  color:blue;
+  
+}
+
